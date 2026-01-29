@@ -23,39 +23,29 @@ set(LIRI_EXECUTABLE_NAME Li-ri)
 option(USE_CONAN
   "Use conan to fetch dependencies" OFF)
 if(USE_CONAN)
-  find_package(glfw3 REQUIRED CONFIG)
-  find_package(PNG REQUIRED CONFIG)
+  find_package(SDL2 REQUIRED CONFIG)
+  find_package(SDL2_mixer REQUIRED CONFIG)
 else()
   find_package(PkgConfig REQUIRED)
-  pkg_check_modules(GLFW REQUIRED glfw3)
-  pkg_check_modules(PNG REQUIRED libpng)
+  pkg_check_modules(SDL2 REQUIRED sdl2 SDL2_mixer)
 endif()
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 
-option (USE_SYSTEM_SIMPLEINI "Use system SimpleIni instead of FetchContent" OFF)
-if(USE_SYSTEM_SIMPLEINI)
-  find_package(SimpleIni REQUIRED CONFIG)
-else()
-  include(FetchContent)
-  FetchContent_Declare(simpleini
-    GIT_REPOSITORY https://github.com/brofield/simpleini.git
-    GIT_TAG        09c21bda1dc1b578fa55f4a005d79b0afd481296 # v4.22
-    )
-  FetchContent_MakeAvailable(simpleini)
-endif()
-
 add_executable(${LIRI_EXECUTABLE_NAME} WIN32
-  src/game.cpp 
-  src/graphics.cpp 
-  src/input.cpp 
-  src/level.cpp 
-  src/loco.cpp 
-  src/main.cpp 
-  src/system.cpp 
-  src/utils.cpp
+  src/audio.cc
+  src/audio.h
+  src/screen.cc
+  src/screen.h
+  src/main.cc
+  src/mouse.cc
+  src/mouse.h
+  src/utils.cc
+  src/utils.h
+  src/graphics.cc
+  src/graphics.h
   )
 
 configure_file(src/config.h.in "${CMAKE_CURRENT_BINARY_DIR}/config.h" @ONLY)
@@ -66,23 +56,14 @@ if(LINUX)
 endif()
 
 if(USE_CONAN)
-  target_link_libraries(${LIRI_EXECUTABLE_NAME} PRIVATE GLFW::GLFW)
+  target_link_libraries(${LIRI_EXECUTABLE_NAME} PRIVATE SDL2::SDL2 SDL2_mixer::SDL2_mixer)
 else()
-  target_include_directories(${LIRI_EXECUTABLE_NAME} PUBLIC ${GLFW_INCLUDE_DIRS})
-  target_link_libraries(${LIRI_EXECUTABLE_NAME} PRIVATE ${GLFW_LINK_LIBRARIES})
+  target_include_directories(${LIRI_EXECUTABLE_NAME} PUBLIC ${SDL2_INCLUDE_DIRS})
+  target_link_libraries(${LIRI_EXECUTABLE_NAME} PRIVATE ${SDL2_LINK_LIBRARIES})
 endif()
-
-find_package(OpenGL REQUIRED)
 
 target_link_libraries(${LIRI_EXECUTABLE_NAME} PRIVATE SimpleIni::SimpleIni)
-target_link_libraries(${LIRI_EXECUTABLE_NAME} PRIVATE OpenGL::GL)
 
-if(USE_CONAN)
-  target_link_libraries(${LIRI_EXECUTABLE_NAME} PRIVATE PNG::PNG)
-else()
-  target_include_directories(${LIRI_EXECUTABLE_NAME} PRIVATE ${PNG_INCLUDE_DIRS})
-  target_link_libraries(${LIRI_EXECUTABLE_NAME} PRIVATE ${PNG_LIBRARIES})
-endif()
 
 include(GNUInstallDirs)
 install(TARGETS ${LIRI_EXECUTABLE_NAME}
