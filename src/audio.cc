@@ -61,23 +61,23 @@ bool Audio::Init()
     Sound = new Mix_Chunk *[sSize];
 
     /*** Loading sound effects ***/
-    strcpy(PathFile, "Sounds/click.wav");
+    strcpy(PathFile, "Sounds/click.mp3");
     Utils::GetPath(PathFile);
     Sound[sClick] = Mix_LoadWAV(PathFile);
 
-    strcpy(PathFile, "Sounds/speed.wav");
+    strcpy(PathFile, "Sounds/speedup.mp3");
     Utils::GetPath(PathFile);
     Sound[sSpeed] = Mix_LoadWAV(PathFile);
 
-    strcpy(PathFile, "Sounds/crash.wav");
+    strcpy(PathFile, "Sounds/crash.mp3");
     Utils::GetPath(PathFile);
     Sound[sCrash] = Mix_LoadWAV(PathFile);
 
-    strcpy(PathFile, "Sounds/end.wav");
+    strcpy(PathFile, "Sounds/win.mp3");
     Utils::GetPath(PathFile);
     Sound[sEnd] = Mix_LoadWAV(PathFile);
 
-    strcpy(PathFile, "Sounds/lose.wav");
+    strcpy(PathFile, "Sounds/wrong.mp3");
     Utils::GetPath(PathFile);
     Sound[sLose] = Mix_LoadWAV(PathFile);
 
@@ -85,7 +85,7 @@ bool Audio::Init()
     Utils::GetPath(PathFile);
     Sound[sExpand] = Mix_LoadWAV(PathFile);
 
-    strcpy(PathFile, "Sounds/wagon.wav");
+    strcpy(PathFile, "Sounds/wagon.mp3");
     Utils::GetPath(PathFile);
     Sound[sWagon] = Mix_LoadWAV(PathFile);
 
@@ -93,7 +93,7 @@ bool Audio::Init()
     Utils::GetPath(PathFile);
     Sound[sShrink] = Mix_LoadWAV(PathFile);
 
-    strcpy(PathFile, "Sounds/live.wav");
+    strcpy(PathFile, "Sounds/live.mp3");
     Utils::GetPath(PathFile);
     Sound[sLive] = Mix_LoadWAV(PathFile);
 
