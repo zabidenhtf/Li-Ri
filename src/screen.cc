@@ -26,6 +26,49 @@
 #include "screen.h"
 
 extern Sprite *Sprites;
+extern SDL_Window *sdlWindow;
+extern SDL_Renderer *sdlRenderer;
+
+Screen::Screen(){
+    SDL_SetRenderDrawBlendMode(sdlRenderer, SDL_BLENDMODE_BLEND);
+    tRectangle.x = 0;
+    tRectangle.y = 0;
+    tRectangle.w = 800;
+    tRectangle.h = 600;
+}
+
+void Screen::StartTransition(){
+    IsTransition = true;
+    tAlpha = 0;
+    tState = FADE_IN;
+}
+
+void Screen::PrintTransition(){
+    if (IsTransition == true){
+        switch (tState){
+            case FADE_IN:
+                tAlpha+=10;
+                if (tAlpha >= 255){
+                    tAlpha = 255;
+                    tState = FADE_OUT;
+                }
+                break; 
+            case FADE_OUT:
+                tAlpha-=10;
+                if (tAlpha <= 0){
+                    tAlpha = 0;
+                    tState = NONE;
+                    IsTransition = false;
+                }
+                break; 
+
+        }
+        // Drawing rectangle what cover screen
+        SDL_SetRenderDrawColor(sdlRenderer, 0, 0, 0, tAlpha);
+        SDL_RenderFillRect(sdlRenderer, &tRectangle);
+        
+    }
+}
 
 /*** Display a sprite ***/
 /************************/

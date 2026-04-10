@@ -340,6 +340,10 @@ eMenu Menu::SDLMain_Language()
         Center_Arrows();
 
         m_mouse.Print();
+        // Draw transition
+        if (m_screen.GetTransition() == true){
+            m_screen.PrintTransition();
+        }
 
         // Update render
         SDL_RenderPresent(sdlRenderer);
@@ -551,6 +555,7 @@ eMenu Menu::SDLMain_Options()
                     case ' ':
                     case SDLK_RETURN:
                     case SDLK_KP_ENTER:
+                        m_screen.StartTransition();
                         switch (PyE) {
                         case 0:
                         case 1:

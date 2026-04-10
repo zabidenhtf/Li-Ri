@@ -27,12 +27,21 @@
 #include "sprite.h"
 #include "preference.h"
 
+enum TransitionState {
+    NONE,
+    FADE_OUT,
+    FADE_IN
+};
+
 class Screen
 {
 public:
-    Screen() = default;
+    Screen();
     ~Screen() = default;
 
+    void StartTransition(); // Draw fade in and fade out animation
+    bool GetTransition(){return IsTransition;}
+    void PrintTransition();
     void PrintSprite(e_Sprite NumSpr, int Num, int x, int y); // Displays a sprite
     void PrintCable(int dx, int dy, int fx, int fy); // Displays a cable/rope
     void PrintText(e_Sprite Text, int x, int y); // Displays text
@@ -41,6 +50,10 @@ public:
 
 private:
     int Score { -1 }; // Stores displayed score
+    SDL_Rect tRectangle;
+	TransitionState tState = NONE;
+    int tAlpha=0;
+	bool IsTransition=false;
 };
 
 #endif
