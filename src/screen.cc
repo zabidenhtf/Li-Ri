@@ -28,6 +28,8 @@
 extern Sprite *Sprites;
 extern SDL_Window *sdlWindow;
 extern SDL_Renderer *sdlRenderer;
+extern int currentTime;
+extern int previousTime;
 
 Screen::Screen(){
     SDL_SetRenderDrawBlendMode(sdlRenderer, SDL_BLENDMODE_BLEND);
@@ -47,14 +49,14 @@ void Screen::PrintTransition(){
     if (IsTransition == true){
         switch (tState){
             case FADE_IN:
-                tAlpha+=10;
+                tAlpha+=currentTime-previousTime;
                 if (tAlpha >= 255){
                     tAlpha = 255;
                     tState = FADE_OUT;
                 }
                 break; 
             case FADE_OUT:
-                tAlpha-=10;
+                tAlpha-=currentTime-previousTime;
                 if (tAlpha <= 0){
                     tAlpha = 0;
                     tState = NONE;

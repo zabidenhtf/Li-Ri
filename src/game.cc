@@ -220,6 +220,12 @@ eMenu Game::SDLMain()
         // Handles display
         DrawLevel(NumN);
         DisplayScreen();
+
+        // Draw transition
+        if (m_screen.GetTransition() == true){
+            m_screen.PrintTransition();
+        }
+
         SDL_RenderPresent(sdlRenderer);
 
         if (doScreenshot) {

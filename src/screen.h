@@ -24,10 +24,12 @@
 #ifndef SCREEN_DOM_
 #define SCREEN_DOM_
 
+#include <SDL2/SDL_timer.h> // for SDL_GetTicks, SDL_Delay
+
 #include "sprite.h"
 #include "preference.h"
 
-enum TransitionState {
+enum eTransitionState {
     NONE,
     FADE_OUT,
     FADE_IN
@@ -41,6 +43,7 @@ public:
 
     void StartTransition(); // Draw fade in and fade out animation
     bool GetTransition(){return IsTransition;}
+    eTransitionState GetTransitionState(){return tState;}
     void PrintTransition();
     void PrintSprite(e_Sprite NumSpr, int Num, int x, int y); // Displays a sprite
     void PrintCable(int dx, int dy, int fx, int fy); // Displays a cable/rope
@@ -51,7 +54,7 @@ public:
 private:
     int Score { -1 }; // Stores displayed score
     SDL_Rect tRectangle;
-	TransitionState tState = NONE;
+	eTransitionState tState = NONE;
     int tAlpha=0;
 	bool IsTransition=false;
 };

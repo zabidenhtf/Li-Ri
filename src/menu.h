@@ -61,6 +61,7 @@ private:
     int PyE { 0 }; // Position of the cursor in the menu
     int Level { 0 };
     int CenterM { 0 }; // Variable for the settings menu
+    eMenu Target;
 
     Game &m_game;
     Audio &m_audio;

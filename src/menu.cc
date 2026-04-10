@@ -138,7 +138,9 @@ eMenu Menu::SDLMain()
                     switch (event.key.keysym.sym) {
                     case SDLK_ESCAPE:
                     case SDLK_AC_BACK: // Android back button
-                        return mQuit;
+                        m_screen.StartTransition();
+                        Target = mQuit;
+                        break;
                     case SDLK_UP:
                         PyE--;
                         if (PyE < 0) {
@@ -161,13 +163,21 @@ eMenu Menu::SDLMain()
                     case SDLK_KP_ENTER:
                         switch (PyE) {
                         case 0:
-                            return mMenuSpeed;
+                            m_screen.StartTransition();
+                            Target = mMenuSpeed;
+                            break;
                         case 1:
-                            return mScore;
+                            m_screen.StartTransition();
+                            Target = mScore;
+                            break;
                         case 2:
-                            return mOption;
+                            m_screen.StartTransition();
+                            Target = mOption;
+                            break;
                         case 3:
-                            return mQuit;
+                            m_screen.StartTransition();
+                            Target = mQuit;
+                            break;
                         }
                         break;
                     default:
@@ -199,6 +209,24 @@ eMenu Menu::SDLMain()
         Print_Main();
         m_mouse.Print();
 
+        if (m_screen.GetTransitionState() == FADE_OUT && Target == mMenuSpeed){
+            return Target;
+        }
+        else if (m_screen.GetTransitionState() == FADE_OUT && Target == mScore){
+            return Target;
+        }
+        else if (m_screen.GetTransitionState() == FADE_OUT && Target == mOption){
+            return Target;
+        }
+        else if (m_screen.GetTransitionState() == FADE_OUT && Target == mQuit){
+            return Target;
+        }
+
+        // Draw transition
+        if (m_screen.GetTransition() == true){
+            m_screen.PrintTransition();
+        }
+
         // Update render
         SDL_RenderPresent(sdlRenderer);
 
@@ -228,7 +256,6 @@ eMenu Menu::SDLMain_Language()
     SDL_RenderClear(sdlRenderer);
     // Set background image and build display
     Sprites[background_menu].Draw(400, 300, 0, Sprites[fmenu].Image[0]);
-
     // Draw available languages
     NCol = 3;
     if (Pref.NLanguages % NCol == 0) {
@@ -248,6 +275,7 @@ eMenu Menu::SDLMain_Language()
     }
 
     Menu_Py[Pref.NLanguages].StartX = -1;
+    m_screen.PrintTransition();
 
     // Erase background
     SDL_RenderPresent(sdlRenderer);
@@ -364,6 +392,7 @@ void Menu::InitMain_Options()
     Sprites[background_menu].Draw(400, 300, 0, Sprites[fmenu].Image[0]);
     Sprites[gmenu].Draw(400, 300, 0, Sprites[fmenu].Image[0]);
     Sprites[keys].Draw(690, 505, 0, Sprites[fmenu].Image[0]);
+    m_screen.PrintTransition();
 
     AddButton(0, sound, 140, 110);
     AddButton(1, music, 160, 200);
@@ -459,7 +488,8 @@ eMenu Menu::SDLMain_Options()
                     switch (event.key.keysym.sym) {
                     case SDLK_ESCAPE:
                     case SDLK_AC_BACK: // Android back button
-                        return mMenu;
+                        m_screen.StartTransition();
+                        Target = mMenu;
                     case SDLK_LEFT:
                         switch (PyE) {
                         case 2:
@@ -555,7 +585,6 @@ eMenu Menu::SDLMain_Options()
                     case ' ':
                     case SDLK_RETURN:
                     case SDLK_KP_ENTER:
-                        m_screen.StartTransition();
                         switch (PyE) {
                         case 0:
                         case 1:
@@ -566,7 +595,8 @@ eMenu Menu::SDLMain_Options()
                             PyE = 2;
                             break;
                         case 3: // Language choice
-                            SDLMain_Language();
+                            m_screen.StartTransition();
+                            Target = mLanguage;
                             PyE = 3;
                             break;
                         case 4: // Audio theme
@@ -607,8 +637,9 @@ eMenu Menu::SDLMain_Options()
                             }
                             m_audio.DoVolume();
                             break;
-                        default:
-                            return mMenu;
+                        default:    
+                            m_screen.StartTransition();
+                            Target = mMenu;
                         }
                     default:
                         break;
@@ -708,7 +739,17 @@ eMenu Menu::SDLMain_Options()
         }
 
         m_mouse.Print();
+        if (m_screen.GetTransitionState() == FADE_OUT && Target == mLanguage){
+            SDLMain_Language();
+        }
+        else if (m_screen.GetTransitionState() == FADE_OUT && Target == mMenu){
+            return mMenu;
+        }
 
+        // Draw transition
+        if (m_screen.GetTransition() == true){
+            m_screen.PrintTransition();
+        }
         // Update render
         SDL_RenderPresent(sdlRenderer);
 
@@ -811,6 +852,11 @@ eMenu Menu::SDLMain_Speed()
         // Handle display
         Print_Main();
         m_mouse.Print();
+
+        // Draw transition
+        if (m_screen.GetTransition() == true){
+            m_screen.PrintTransition();
+        }
 
         // Update render
         SDL_RenderPresent(sdlRenderer);
@@ -969,6 +1015,11 @@ eMenu Menu::SDLMain_Level()
             Print_Main();
         }
         m_mouse.Print();
+
+        // Draw transition
+        if (m_screen.GetTransition() == true){
+            m_screen.PrintTransition();
+        }
 
         // Update render
         SDL_RenderPresent(sdlRenderer);
@@ -1187,6 +1238,12 @@ eMenu Menu::SDLMain_HR()
             m_mouse.Print();
         }
 
+
+        // Draw transition
+        if (m_screen.GetTransition() == true){
+            m_screen.PrintTransition();
+        }
+
         // Update render
         SDL_RenderPresent(sdlRenderer);
 
@@ -1302,6 +1359,11 @@ eMenu Menu::SDLMain_InGame()
         Print_InGame();
         Print_Main(340);
         m_mouse.Print();
+
+        // Draw transition
+        if (m_screen.GetTransition() == true){
+            m_screen.PrintTransition();
+        }
 
         // Update render
         SDL_RenderPresent(sdlRenderer);
@@ -1456,6 +1518,11 @@ eMenu Menu::SDLMain_Score(bool EditScore)
             i = (currentTime / 50) % 20; // Draw cursors
             m_screen.PrintSprite(arrow_left, i, 110, 120 + NEdit * (360 / 7));
             m_screen.PrintSprite(arrow_right, i, 180 + StringLength(Pref.Sco[NEdit].Name), 120 + NEdit * (360 / 7));
+        }
+
+        // Draw transition
+        if (m_screen.GetTransition() == true){
+            m_screen.PrintTransition();
         }
 
         // Update render
