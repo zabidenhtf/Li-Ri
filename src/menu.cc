@@ -312,7 +312,9 @@ eMenu Menu::SDLMain_Language()
                         if (Pref.Language == -1) {
                             Pref.Language = PyE;
                         }
-                        return mMenu;
+                        m_screen.StartTransition();
+                        Target = mMenu;
+                        break;
                     case SDLK_UP:
                         PyE--;
                         if (PyE < 0) {
@@ -347,7 +349,9 @@ eMenu Menu::SDLMain_Language()
                         if (Pref.Language != OldLanguage) {
                             LoadLanguage();
                         }
-                        return mMenu;
+                        m_screen.StartTransition();
+                        Target = mMenu;
+                        break;
                     default:
                         break;
                     }
@@ -368,6 +372,11 @@ eMenu Menu::SDLMain_Language()
         Center_Arrows();
 
         m_mouse.Print();
+
+        if (m_screen.GetTransitionState() == FADE_OUT && Target == mMenu){
+            return Target;
+        }
+
         // Draw transition
         if (m_screen.GetTransition() == true){
             m_screen.PrintTransition();
@@ -640,6 +649,7 @@ eMenu Menu::SDLMain_Options()
                         default:    
                             m_screen.StartTransition();
                             Target = mMenu;
+                            break;
                         }
                     default:
                         break;
@@ -823,14 +833,20 @@ eMenu Menu::SDLMain_Speed()
                     case SDLK_KP_ENTER:
                         switch (PyE) {
                         case 0:
+                            m_screen.StartTransition();
                             Pref.Difficulty = Easy;
-                            return Pref.LevelMax[Pref.Difficulty] > 0 ? mMenuLevel : mGame;
+                            Target = Pref.LevelMax[Pref.Difficulty] > 0 ? mMenuLevel : mGame;
+                            break;
                         case 1:
+                            m_screen.StartTransition();
                             Pref.Difficulty = Normal;
-                            return Pref.LevelMax[Pref.Difficulty] > 0 ? mMenuLevel : mGame;
+                            Target = Pref.LevelMax[Pref.Difficulty] > 0 ? mMenuLevel : mGame;
+                            break;
                         case 2:
+                            m_screen.StartTransition();
                             Pref.Difficulty = Hard;
-                            return Pref.LevelMax[Pref.Difficulty] > 0 ? mMenuLevel : mGame;
+                            Target = Pref.LevelMax[Pref.Difficulty] > 0 ? mMenuLevel : mGame;
+                            break;
                         }
                         break;
                     default:
@@ -1015,6 +1031,10 @@ eMenu Menu::SDLMain_Level()
             Print_Main();
         }
         m_mouse.Print();
+        if (m_screen.GetTransitionState() == FADE_OUT){
+            return Target;
+        }
+
 
         // Draw transition
         if (m_screen.GetTransition() == true){

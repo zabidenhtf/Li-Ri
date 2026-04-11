@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/zabiden/Documents/Li-Ri/build/_deps/simpleini-subbuild/CMakeFiles/simpleini-populate"
+		},
+		{
+			"file" : "/home/zabiden/Documents/Li-Ri/build/_deps/simpleini-subbuild/CMakeFiles/simpleini-populate.rule"
+		},
+		{
+			"file" : "/home/zabiden/Documents/Li-Ri/build/_deps/simpleini-subbuild/CMakeFiles/simpleini-populate-complete.rule"
+		},
+		{
+			"file" : "/home/zabiden/Documents/Li-Ri/build/_deps/simpleini-subbuild/simpleini-populate-prefix/src/simpleini-populate-stamp/simpleini-populate-build.rule"
+		},
+		{
+			"file" : "/home/zabiden/Documents/Li-Ri/build/_deps/simpleini-subbuild/simpleini-populate-prefix/src/simpleini-populate-stamp/simpleini-populate-configure.rule"
+		},
+		{
+			"file" : "/home/zabiden/Documents/Li-Ri/build/_deps/simpleini-subbuild/simpleini-populate-prefix/src/simpleini-populate-stamp/simpleini-populate-download.rule"
+		},
+		{
+			"file" : "/home/zabiden/Documents/Li-Ri/build/_deps/simpleini-subbuild/simpleini-populate-prefix/src/simpleini-populate-stamp/simpleini-populate-install.rule"
+		},
+		{
+			"file" : "/home/zabiden/Documents/Li-Ri/build/_deps/simpleini-subbuild/simpleini-populate-prefix/src/simpleini-populate-stamp/simpleini-populate-mkdir.rule"
+		},
+		{
+			"file" : "/home/zabiden/Documents/Li-Ri/build/_deps/simpleini-subbuild/simpleini-populate-prefix/src/simpleini-populate-stamp/simpleini-populate-patch.rule"
+		},
+		{
+			"file" : "/home/zabiden/Documents/Li-Ri/build/_deps/simpleini-subbuild/simpleini-populate-prefix/src/simpleini-populate-stamp/simpleini-populate-test.rule"
+		},
+		{
+			"file" : "/home/zabiden/Documents/Li-Ri/build/_deps/simpleini-subbuild/simpleini-populate-prefix/src/simpleini-populate-stamp/simpleini-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"simpleini-populate"
+		],
+		"name" : "simpleini-populate"
+	}
+}

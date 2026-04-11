@@ -1,0 +1,17 @@
+/home/zabiden/Documents/Li-Ri/build/CMakeFiles/Li-ri.dir
+/home/zabiden/Documents/Li-Ri/build/CMakeFiles/package.dir
+/home/zabiden/Documents/Li-Ri/build/CMakeFiles/package_source.dir
+/home/zabiden/Documents/Li-Ri/build/CMakeFiles/edit_cache.dir
+/home/zabiden/Documents/Li-Ri/build/CMakeFiles/rebuild_cache.dir
+/home/zabiden/Documents/Li-Ri/build/CMakeFiles/list_install_components.dir
+/home/zabiden/Documents/Li-Ri/build/CMakeFiles/install.dir
+/home/zabiden/Documents/Li-Ri/build/CMakeFiles/install/local.dir
+/home/zabiden/Documents/Li-Ri/build/CMakeFiles/install/strip.dir
+/home/zabiden/Documents/Li-Ri/build/_deps/simpleini-build/CMakeFiles/package.dir
+/home/zabiden/Documents/Li-Ri/build/_deps/simpleini-build/CMakeFiles/package_source.dir
+/home/zabiden/Documents/Li-Ri/build/_deps/simpleini-build/CMakeFiles/edit_cache.dir
+/home/zabiden/Documents/Li-Ri/build/_deps/simpleini-build/CMakeFiles/rebuild_cache.dir
+/home/zabiden/Documents/Li-Ri/build/_deps/simpleini-build/CMakeFiles/list_install_components.dir
+/home/zabiden/Documents/Li-Ri/build/_deps/simpleini-build/CMakeFiles/install.dir
+/home/zabiden/Documents/Li-Ri/build/_deps/simpleini-build/CMakeFiles/install/local.dir
+/home/zabiden/Documents/Li-Ri/build/_deps/simpleini-build/CMakeFiles/install/strip.dir
